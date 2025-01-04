@@ -24,7 +24,7 @@ import javax.swing.text.html.parser.Entity;
 
 @Configuration
 @EnableBatchProcessing
-public class BatchConfiguration {
+public class PersonJobConfiguration {
 
     
     @Bean
