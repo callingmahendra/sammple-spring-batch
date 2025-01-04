@@ -24,12 +24,6 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
     public void afterJob(JobExecution jobExecution) {
         if (jobExecution.getStatus() == BatchStatus.COMPLETED) {
             log.info("!!! JOB FINISHED! Time to verify the results");
-
-            Query query = entityManager.createQuery("SELECT p FROM ProcessedPerson p");
-            List<ProcessedPerson> people = query.getResultList();
-            for (ProcessedPerson person : people) {
-                log.info("Found <" + person + "> in the database.");
-            }
         }
     }
 }

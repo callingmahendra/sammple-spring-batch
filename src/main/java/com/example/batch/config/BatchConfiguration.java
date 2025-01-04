@@ -20,29 +20,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.EntityManagerFactory;
+import javax.swing.text.html.parser.Entity;
 
 @Configuration
 @EnableBatchProcessing
 public class BatchConfiguration {
 
-    @Autowired
-    private EntityManagerFactory entityManagerFactory;
-
-    @Bean
-    public ItemReader<Person> reader() {
-        return new PersonItemReader(entityManagerFactory);
-    }
-
-    @Bean
-    public ItemProcessor<Person, ProcessedPerson> processor() {
-        return new PersonItemProcessor();
-    }
-
-    @Bean
-    public ItemWriter<ProcessedPerson> writer() {
-        return new PersonItemWriter(entityManagerFactory);
-    }
-
+    
     @Bean
     public Job importUserJob(JobBuilderFactory jobs, Step s1, JobCompletionNotificationListener listener) {
         return jobs.get("importUserJob")
@@ -54,13 +38,12 @@ public class BatchConfiguration {
     }
 
     @Bean
-    public Step step1(StepBuilderFactory stepBuilderFactory, ItemReader<Person> reader,
-                      ItemProcessor<Person, ProcessedPerson> processor, ItemWriter<ProcessedPerson> writer) {
+    public Step step1(StepBuilderFactory stepBuilderFactory, EntityManagerFactory entityManagerFactory) {
         return stepBuilderFactory.get("step1")
                 .<Person, ProcessedPerson>chunk(10)
-                .reader(reader)
-                .processor(processor)
-                .writer(writer)
+                .reader(new PersonItemReader(entityManagerFactory))
+                .processor(new PersonItemProcessor())
+                .writer(new PersonItemWriter(entityManagerFactory))
                 .build();
     }
 }
