@@ -1,0 +1,7 @@
+/workspaces/sammple-spring-batch/src/main/java/com/example/batch/PersonItemProcessor.java
+/workspaces/sammple-spring-batch/src/main/java/com/example/batch/PersonItemReader.java
+/workspaces/sammple-spring-batch/src/main/java/com/example/batch/Person.java
+/workspaces/sammple-spring-batch/src/main/java/com/example/batch/BatchConfiguration.java
+/workspaces/sammple-spring-batch/src/main/java/com/example/batch/JobCompletionNotificationListener.java
+/workspaces/sammple-spring-batch/src/main/java/com/example/batch/SpringBatchApplication.java
+/workspaces/sammple-spring-batch/src/main/java/com/example/batch/PersonItemWriter.java
